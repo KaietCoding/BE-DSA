@@ -1,0 +1,23 @@
+class Solution {
+    private int maxZigZag = 0;
+
+    public int solution(Tree T) {
+        if (T == null) return 0;
+        
+        findPath(T.l, true, 0);
+        findPath(T.r, false, 0);
+        
+        return maxZigZag;
+    }
+
+    private void findPath(Tree node, boolean isLeft, int currentTurns) {
+        if (node == null) return;
+
+        if (currentTurns > maxZigZag) {
+            maxZigZag = currentTurns;
+        }
+
+        findPath(node.l, true, isLeft ? currentTurns : currentTurns + 1);
+        findPath(node.r, false, isLeft ? currentTurns + 1 : currentTurns);
+    }
+}
